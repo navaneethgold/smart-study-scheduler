@@ -83,6 +83,23 @@ app.post("/signup",async(req,res)=>{
     });
 })
 
+app.post("/login",passport.authenticate("local",{failureRedirect:"/login"}),async(req,res)=>{
+    try{
+        if(req.isAuthenticated()){
+            res.json(req.user);
+        }
+    }catch (error) {
+        console.log("error logging in:",error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+})
+app.get("/check-auth",async(req,res)=>{
+    if (req.isAuthenticated()) {
+        res.json({ isAuthenticated: true, user: req.user });
+    } else {
+        res.json({ isAuthenticated: false });
+    }
+})
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

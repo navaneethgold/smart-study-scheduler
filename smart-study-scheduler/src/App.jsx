@@ -4,6 +4,7 @@ import AddTaskForm from "./pages/newtask";
 import Home from "./pages/home";
 import Myprofile from "./pages/profile";
 import Signup from "./pages/signup";
+import Login from "./pages/login";
 // import Profile from "./pages/Profile";
 // import Settings from "./pages/Settings";
 
@@ -18,6 +19,7 @@ function App() {
           <Route path="/add-task" element={<AddTaskForm />} />
           <Route path="/profile" element={<Myprofile />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </BrowserRouter>
