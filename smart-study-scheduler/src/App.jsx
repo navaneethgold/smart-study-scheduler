@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import AddTaskForm from "./pages/newtask";
 import Home from "./pages/home";
+import Myprofile from "./pages/profile";
+import Signup from "./pages/signup";
 // import Profile from "./pages/Profile";
 // import Settings from "./pages/Settings";
 
@@ -14,6 +16,8 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/add-task" element={<AddTaskForm />} />
+          <Route path="/profile" element={<Myprofile />} />
+          <Route path="/signup" element={<Signup />} />
         </Route>
       </Routes>
     </BrowserRouter>
