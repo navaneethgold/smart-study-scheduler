@@ -101,6 +101,14 @@ app.get("/check-auth",async(req,res)=>{
     }
 })
 
+app.get("/user/subjects", (req, res) => {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: "Not logged in" });
+  }
+  res.json(req.user.subjects);
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
