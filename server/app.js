@@ -5,6 +5,9 @@ const passportLocalMongoose=require("passport-local-mongoose");
 const path=require("path");
 const passport=require("passport");
 const localStrategy=require("passport-local");
+// import studyPlanRouter from './cohere.js';
+// const airouter=require("./cohere.js");
+// const generateStudyPlan=require("./openai");
 const session=require("express-session");
 const app=express()
 app.use(express.json());
@@ -43,8 +46,11 @@ main().then(()=>{
 async function main(){
     await mongoose.connect(dburl);
 }
-const aiRoutes = require('./openai');
-app.use("/", aiRoutes);
+
+const generateStudyPlanRouter = require("./openai"); // ✅ CommonJS import
+
+app.use("/", generateStudyPlanRouter); // ✅ Now works properly
+
 
 
 app.post("/add",async(req,res)=>{

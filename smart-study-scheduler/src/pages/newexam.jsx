@@ -82,23 +82,25 @@ const NewExam = () => {
       { selectedData, date, perday },
       { withCredentials: true }
     );
+    
+    const data = await response.json();
+    console.log(data.plan);
+  //   const generatedTasks = response.data.tasks; // assuming backend returns { tasks: [...] }
 
-    const generatedTasks = response.data.tasks; // assuming backend returns { tasks: [...] }
+  //   console.log("Generated Tasks:", generatedTasks);
 
-    console.log("Generated Tasks:", generatedTasks);
+  //   // Step 2: Send each generated task to /tasks endpoint
+  //   const taskPromises = generatedTasks.map(task =>{
+  //     const taskData = {
+  //       ...task,
+  //       username:userData.username,
+  //       durationInMin: Number(task.durationInMin),
+  //       approxpomo: Number(task.approxpomo)
+  //     };
+  //     axios.post("http://localhost:5000/add", taskData, { withCredentials: true })
+  // });
 
-    // Step 2: Send each generated task to /tasks endpoint
-    const taskPromises = generatedTasks.map(task =>{
-      const taskData = {
-        ...task,
-        username:userData.username,
-        durationInMin: Number(task.durationInMin),
-        approxpomo: Number(task.approxpomo)
-      };
-      axios.post("http://localhost:5000/add", taskData, { withCredentials: true })
-  });
-
-    await Promise.all(taskPromises);
+  //   await Promise.all(taskPromises);
     alert("Study plan generated and saved successfully!");
 
   } catch (error) {

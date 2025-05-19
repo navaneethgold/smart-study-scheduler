@@ -1,21 +1,14 @@
-// server/routes/ai.js
 const express = require("express");
+const { CohereClient } = require("cohere-ai");
+
 const router = express.Router();
-// const { Configuration, OpenAIApi } = require("openai");
-require("dotenv").config();
 
-const OpenAI = require("openai");
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
+const cohere = new CohereClient({
+  token: 'y2USBIPOx0qdwX31nuY68DLlMHMBufLsUPaJAbBV',
 });
-// const openai = new OpenAIApi(configuration);
 
-router.post("/generate-plan", async (req, res) => {
-  try {
-    const { selectedData, date, perday } = req.body;
-    console.log("topicss: ",date);
-    const prompt = `You are a smart AI that creates efficient study plans.
+const generateStudyPlan = async (selectedData, date, perday) => {
+  const prompt = `You are a smart AI that creates efficient study plans.
 
 The user can spend ${perday} hours a day studying. The exam is on ${date}.
 
@@ -33,22 +26,23 @@ Please generate a study plan as an array of JavaScript objects, one for each cha
   done: false
 }
 
-Ensure that total daily study time does not exceed ${perday} hours. Distribute chapters evenly and realistically until the exam date. Do NOT include 'username' or 'createdAt'.
-`;
+Ensure that total daily study time does not exceed ${perday} hours. Distribute chapters evenly and realistically until the exam date. Do NOT include 'username' or 'createdAt'.`;
 
-    const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: prompt }],
-    });
 
-    const result = response.data.choices[0].message.content;
-    const tasks = JSON.parse(result); // If not safe, wrap with try-catch
-    res.json({ success: true, tasks });
+  const response = await cohere.generate({
+    model: 'command-r',
+    prompt,
+    max_tokens: 500,
+    temperature: 0.7,
+  });
 
-  } catch (error) {
-    console.error("AI generation failed:", error);
-    res.status(500).json({ success: false, error: error.message });
-  }
+  return response.body.generations[0].text.trim();
+};
+
+router.post("/generate-plan", async (req, res) => {
+  const { topics, examDate, dailyHours } = req.body;
+  const plan = await generateStudyPlan(topics, examDate, dailyHours);
+  res.json({ plan });
 });
 
-module.exports = router;
+module.exports = router; // ✅ CommonJS export
