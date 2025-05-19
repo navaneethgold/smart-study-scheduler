@@ -6,28 +6,42 @@
     width: 200px;
     height: 100vh;
     /* background-color: #f0f0f0; */
-    background: linear-gradient(to bottom, #000000, #1c1c1c);
-    padding: 1rem;
+    background: linear-gradient(to bottom,#1c1c1c ,#000000, #1c1c1c);
+    /* padding: 3rem; */
     box-sizing: border-box;
     margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 }
-
-/* .sidebar ul {
-  list-style: none;
-  padding: 0;
-  
-
+/* .subs{
+  padding: 20px;
 } */
-/* 
-.sidebar li {
-  margin: 1rem 0;
-} */
-
-.sidebar li a {
+.home,.newexam,.newtask,.settings,.profile{
+    width: 80%;
+    /* height: 50%; */
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 10px;
+    color: white;
+    transition: background-color 0.3s ease,color 0.3s ease,box-shadow 0.3s ease;
+ }
+ .sidebar h4 {
   text-decoration: none;
-  color: white;
+  /* color: white; */
 }
+ .home:hover,.newexam:hover,.newtask:hover,.settings:hover,.profile:hover{
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    box-shadow: 0 0 20px #7fff00;
+ }
+ .home:active,.newexam:active,.newtask:active,.settings:active,.profile:active{
+    transform: scale(0.95);
+ }
+ /* .home{
+  background-color: orange;
+ } */

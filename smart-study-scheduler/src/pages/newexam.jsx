@@ -7,6 +7,28 @@ const NewExam = () => {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState({});
   const navigate = useNavigate();
+  const [isLogged,setIsLogged]=useState(null);
+  const [userData,setUserdata]=useState({});
+  useEffect(()=>{
+    const checkAuth=async()=>{
+      try{
+        const res=await axios.get("http://localhost:5000/check-auth",{
+          withCredentials:true,
+        });
+        setIsLogged(res.data.isAuthenticated);
+        if(res.data.isAuthenticated){
+          setUserdata(res.data.user);
+        }else{
+          navigate("/login");
+        }
+      }catch (err) {
+        console.error("Auth check failed", err);
+        setIsLogged(false);
+      }
+    };
+    checkAuth();
+  },[]);
+
 
   useEffect(() => {
     axios.get("http://localhost:5000/user/subjects", { withCredentials: true })
@@ -23,7 +45,6 @@ const NewExam = () => {
       })
       .catch(err => {
         console.error(err);
-        navigate("/login"); // redirect if not authenticated
       });
   }, []);
 
@@ -45,16 +66,47 @@ const NewExam = () => {
     setSelectedSubjects(updated);
   };
 
-//   const generatePlan = () => {
-//     const selectedData = Object.entries(selectedSubjects).map(([subject, data]) => ({
-//       subject,
-//       subtopics: data.subtopics.filter(st => st.checked).map(st => st.name)
-//     })).filter(s => s.subtopics.length > 0);
+  const generatePlan = async () => {
+  const selectedData = Object.entries(selectedSubjects).map(([subject, data]) => ({
+    subject,
+    subtopics: data.subtopics.filter(st => st.checked).map(st => st.name)
+  })).filter(s => s.subtopics.length > 0);
 
-//     console.log("Study Plan:", selectedData);
+  const date = "June 4th 2025";
+  const perday = "10 hours";
+  console.log(selectedData);
+  try {
+    // Step 1: Send selected topics to backend for AI generation
+    const response = await axios.post(
+      "http://localhost:5000/generate-plan",
+      { selectedData, date, perday },
+      { withCredentials: true }
+    );
 
-//     // send to backend or store in context/state
-//   };
+    const generatedTasks = response.data.tasks; // assuming backend returns { tasks: [...] }
+
+    console.log("Generated Tasks:", generatedTasks);
+
+    // Step 2: Send each generated task to /tasks endpoint
+    const taskPromises = generatedTasks.map(task =>{
+      const taskData = {
+        ...task,
+        username:userData.username,
+        durationInMin: Number(task.durationInMin),
+        approxpomo: Number(task.approxpomo)
+      };
+      axios.post("http://localhost:5000/add", taskData, { withCredentials: true })
+  });
+
+    await Promise.all(taskPromises);
+    alert("Study plan generated and saved successfully!");
+
+  } catch (error) {
+    console.error("Error generating or saving study plan:", error);
+    alert("Something went wrong while generating or saving the study plan.");
+  }
+};
+
 
   return (
     <Box sx={{ mx: 'auto', mt: 4, width: "80%" }}>
@@ -86,7 +138,7 @@ const NewExam = () => {
           </Box>
         </Box>
       ))}
-      <Button variant="contained" color="primary">Generate Study Plan</Button>
+      <Button variant="contained" color="primary" onClick={generatePlan}>Generate Study Plan</Button>
     </Box>
   );
 };

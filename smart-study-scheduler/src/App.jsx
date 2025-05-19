@@ -7,27 +7,26 @@ import Signup from "./pages/signup";
 import Login from "./pages/login";
 import NewExam from "./pages/newexam";
 import Logout from "./pages/logout";
-// import Profile from "./pages/Profile";
-// import Settings from "./pages/Settings";
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-     <BrowserRouter>
+    <BrowserRouter>
       <Routes>
+        {/* Routes without Layout */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+
+        {/* Routes with Layout */}
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/add-task" element={<AddTaskForm />} />
           <Route path="/profile" element={<Myprofile />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/newexam" element={<NewExam />} />
           <Route path="/logout" element={<Logout />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import TaskCard from '../boilerplate/taskcard';
 import { useNavigate } from 'react-router-dom';
+import "../styling/home.css";
 
 export default function Home() {
   const navigate=useNavigate();
@@ -53,9 +54,9 @@ export default function Home() {
     <>
       <div className="head">
         {isLogged ? (
-            <div>
+            <div className='head'>
               <h2>Welcome, {userdata.username}!</h2>
-              <p>Studying: {userdata.studying}</p>
+              <p>{userdata.studying}</p>
             </div>
           ) : (
             <>

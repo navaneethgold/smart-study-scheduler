@@ -43,6 +43,9 @@ main().then(()=>{
 async function main(){
     await mongoose.connect(dburl);
 }
+const aiRoutes = require('./openai');
+app.use("/", aiRoutes);
+
 
 app.post("/add",async(req,res)=>{
     try{

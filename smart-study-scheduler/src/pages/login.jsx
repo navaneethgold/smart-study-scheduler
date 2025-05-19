@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import {
-  Box, Button, TextField, Typography, IconButton, Stack
+  Box, TextField, Typography, IconButton, Stack
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import {useNavigate,useLocation} from "react-router-dom";
-
+import "../styling/login.css"
+// import TextField from '@mui/material/TextField';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
 
 const Login = () => {
   const location = useLocation();
@@ -36,40 +39,45 @@ const Login = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4 }}>
-      <Typography variant="h4" gutterBottom>Login</Typography>
+    <div className="outer">
+    <div className="card">
+    {/* // <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4 }}> */}
+      <h1 className='heading'>Login to TimeTuner</h1>
       <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Username (Email)"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ mt: 4 }}
-        >
-          Login
-        </Button>
+        <Box sx={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center'}}>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end',padding:'10px' }}>
+            <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+            <TextField id="input-with-sx" label="Username" variant="standard" name="username" value={formData.username} onChange={handleChange} required style={{width:'500px'}} color='#273F4F'/>
+          </Box>
+          <Box sx={{ display: 'flex', alignItems: 'flex-end', mt: 2 ,padding:'10px'}}>
+              <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
+              <TextField
+                id="password-input"
+                label="Password"
+                type="password"
+                variant="standard"
+                name="password"
+                color='#273F4F'
+                value={formData.password}
+                onChange={handleChange}
+                required
+                style={{ width: '500px' }}
+              />
+          </Box>
+          
+          <button
+            type="submit"
+            style={{width:'400px'}}
+            className='sub'
+          >
+            Login
+          </button>
+        </Box>
+        
       </form>
-    </Box>
+    {/* // </Box> */}
+    </div>
+    </div>
   );
 };
 
