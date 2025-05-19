@@ -25,18 +25,24 @@ export default function Home() {
     };
     checkAuth();
   },[]);
-
+  console.log(isLogged);
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/tasks"); // adjust port if needed
+        const res = await axios.get("http://localhost:5000/tasks", {
+            withCredentials: true, // ✅ this sends the session cookie
+        });
         setTasks(res.data);
+        // console.log(res.data);
       } catch (err) {
         console.error("Error fetching tasks:", err);
       }
     };
-    fetchTasks();
-  }, []);
+    if(isLogged){
+      fetchTasks();
+    }
+    
+  }, [isLogged]);
   const signup=()=>{
         navigate("/signup");
     }

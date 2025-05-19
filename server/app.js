@@ -57,8 +57,15 @@ app.post("/add",async(req,res)=>{
 
 app.get("/tasks",async(req,res)=>{
     try {
-        const tasks = await Task.find().sort({ createdAt: 1 });
-        res.json(tasks);
+        if(req.isAuthenticated()){
+            const tasks = await Task.find({username:req.user.username}).sort({ createdAt: 1 });
+            res.json(tasks);
+            console.log(tasks);
+        }else{
+            res.status(401).json({ success: false, message: "Not authenticated" });
+        }
+        // console.log(req.user.username);
+        
     } catch (error) {
         console.log("error acquiring tasks:",error);
         res.status(500).json({ success: false, error: error.message });
@@ -86,8 +93,7 @@ app.post("/signup",async(req,res)=>{
 app.post("/login",passport.authenticate("local",{failureRedirect:"/login"}),async(req,res)=>{
     try{
         if(req.isAuthenticated()){
-            const loginurl=req.headers.referer || '/home';
-            res.json({user:req.user,oldurl:loginurl});
+            res.json(req.user);
         }
     }catch (error) {
         console.log("error logging in:",error);

@@ -27,6 +27,7 @@ const AddTaskForm = () => {
     checkAuth();
   },[]);
   const [formData, setFormData] = useState({
+    username:"",
     subject: "",
     chapter: "",
     durationInMin: "",
@@ -40,8 +41,10 @@ const AddTaskForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      
       const taskData = {
         ...formData,
+        username:userData.username,
         durationInMin: Number(formData.durationInMin),
         approxpomo: Number(formData.approxpomo)
       };

@@ -8,6 +8,8 @@ import {useNavigate,useLocation} from "react-router-dom";
 
 
 const Login = () => {
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -26,7 +28,7 @@ const Login = () => {
         withCredentials: true
       });
       alert("Login successful!");
-      // navigate(from,{replace:true});
+      navigate(from,{replace:true});
     } catch (error) {
       console.error(error);
       alert("Login failed.");
