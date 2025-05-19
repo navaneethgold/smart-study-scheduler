@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
+import Logout from "./logout";
 const Myprofile=()=>{
     const [isLogged, setIsLogged] = useState(null);
     const [userdata, setUserdata] = useState({});
@@ -34,6 +35,7 @@ const Myprofile=()=>{
             <div>
               <h2>Welcome, {userdata.username}!</h2>
               <p>Studying: {userdata.studying}</p>
+              <Logout/>
             </div>
           ) : (
             <>

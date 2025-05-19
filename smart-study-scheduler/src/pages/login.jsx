@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom";
+import {useNavigate,useLocation} from "react-router-dom";
 
 
 const Login = () => {
@@ -19,7 +19,6 @@ const Login = () => {
       [e.target.name]: e.target.value
     }));
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -27,7 +26,7 @@ const Login = () => {
         withCredentials: true
       });
       alert("Login successful!");
-      navigate("/profile");
+      // navigate(from,{replace:true});
     } catch (error) {
       console.error(error);
       alert("Login failed.");

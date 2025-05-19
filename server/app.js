@@ -86,7 +86,8 @@ app.post("/signup",async(req,res)=>{
 app.post("/login",passport.authenticate("local",{failureRedirect:"/login"}),async(req,res)=>{
     try{
         if(req.isAuthenticated()){
-            res.json(req.user);
+            const loginurl=req.headers.referer || '/home';
+            res.json({user:req.user,oldurl:loginurl});
         }
     }catch (error) {
         console.log("error logging in:",error);
@@ -107,6 +108,16 @@ app.get("/user/subjects", (req, res) => {
   }
   res.json(req.user.subjects);
 });
+
+
+app.post('/logout', (req, res) => {
+  req.logout(function(err) {
+    if (err) return res.status(500).json({ error: "Logout failed" });
+    res.clearCookie("connect.sid"); // Optional: clear session cookie
+    res.json({ message: "Logged out" });
+  });
+});
+
 
 
 const PORT = process.env.PORT || 5000;

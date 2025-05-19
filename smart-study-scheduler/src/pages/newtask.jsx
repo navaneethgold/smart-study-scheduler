@@ -1,8 +1,31 @@
 // src/components/AddTaskForm.jsx
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AddTaskForm = () => {
+  const [isLogged,setIsLogged]=useState(null);
+  const [userData,setUserdata]=useState({});
+  const navigate=useNavigate();
+  useEffect(()=>{
+    const checkAuth=async()=>{
+      try{
+        const res=await axios.get("http://localhost:5000/check-auth",{
+          withCredentials:true,
+        });
+        setIsLogged(res.data.isAuthenticated);
+        if(res.data.isAuthenticated){
+          setUserdata(res.data.user);
+        }else{
+          navigate("/login");
+        }
+      }catch (err) {
+        console.error("Auth check failed", err);
+        setIsLogged(false);
+      }
+    };
+    checkAuth();
+  },[]);
   const [formData, setFormData] = useState({
     subject: "",
     chapter: "",

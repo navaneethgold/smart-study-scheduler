@@ -6,6 +6,7 @@ import Myprofile from "./pages/profile";
 import Signup from "./pages/signup";
 import Login from "./pages/login";
 import NewExam from "./pages/newexam";
+import Logout from "./pages/logout";
 // import Profile from "./pages/Profile";
 // import Settings from "./pages/Settings";
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/newexam" element={<NewExam />} />
+          <Route path="/logout" element={<Logout />} />
         </Route>
       </Routes>
     </BrowserRouter>
