@@ -53,23 +53,51 @@ app.use("/", generateStudyPlanRouter); // ✅ Now works properly
 
 
 
-app.post("/add",async(req,res)=>{
-    try{
-        const task=new Task(req.body);
-        await task.save();
-        res.status(201).json({ success: true, task });
-    } catch (error) {
-        console.error("Error creating task:", error);
-        res.status(400).json({ success: false, error: error.message });
+app.post("/add", async (req, res) => {
+  try {
+    // let tasks = req.body; // Expecting an array of task objects
+    console.log(req.body);
+    let tasks=req.body;
+    // const rawKey = Object.keys(req.body)[0];
+    // tasks = JSON.parse(rawKey);
+    console.log(tasks);
+    // if(tasks.length<=1){
+    //     tasks = Array.isArray(tasks) ? tasks : [tasks];
+    // }
+
+    // console.log(tasks);
+    // console.log("subjec: ",tasks)
+    const savedTasks = [];
+    for (const task of tasks) {
+      const { subject, chapter, durationInMin, approxpomo } = task;
+
+      const taskData = {
+        username: req.user.username, // assuming user is attached via middleware
+        subject,
+        chapter,
+        durationInMin,
+        approxpomo,
+      };
+
+      const newTask = new Task(taskData);
+      const saved = await newTask.save();
+      savedTasks.push(saved);
     }
+
+    res.status(201).json({ success: true, tasks: savedTasks });
+  } catch (error) {
+    console.error("Error creating tasks:", error);
+    res.status(400).json({ success: false, error: error.message });
+  }
 });
+
 
 app.get("/tasks",async(req,res)=>{
     try {
         if(req.isAuthenticated()){
             const tasks = await Task.find({username:req.user.username}).sort({ createdAt: 1 });
             res.json(tasks);
-            console.log(tasks);
+            // console.log(tasks);
         }else{
             res.status(401).json({ success: false, message: "Not authenticated" });
         }

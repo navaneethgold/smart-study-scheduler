@@ -74,7 +74,7 @@ const NewExam = () => {
 
   const date = "June 4th 2025";
   const perday = "10 hours";
-  console.log(selectedData);
+  // console.log(selectedData);
   try {
     // Step 1: Send selected topics to backend for AI generation
     const response = await axios.post(
@@ -83,24 +83,31 @@ const NewExam = () => {
       { withCredentials: true }
     );
     
-    const data = await response.json();
-    console.log(data.plan);
-  //   const generatedTasks = response.data.tasks; // assuming backend returns { tasks: [...] }
-
-  //   console.log("Generated Tasks:", generatedTasks);
-
-  //   // Step 2: Send each generated task to /tasks endpoint
-  //   const taskPromises = generatedTasks.map(task =>{
-  //     const taskData = {
-  //       ...task,
-  //       username:userData.username,
-  //       durationInMin: Number(task.durationInMin),
-  //       approxpomo: Number(task.approxpomo)
-  //     };
-  //     axios.post("http://localhost:5000/add", taskData, { withCredentials: true })
+    const data = response.data;
+    // console.log(data.plan);
+    // console.log(typeof data.plan,data.plan);
+    let generatedTasks = data.plan; // assuming backend returns { tasks: [...] }
+    // for(let i=0;i<generatedTasks.length;i++){
+    //     const task=generatedTasks[i];
+    //     await axios.post("http://localhost:5000/add", task, { withCredentials: true });
+    // }
+    // generatedTasks = Array.isArray(data.plan) ? data.plan : [data.plan];
+    console.log("ide na:",generatedTasks);
+    // const taskPromises = generatedTasks.map(task =>{
+      // let taskData = {
+      //   ...task,
+      //   username:userData.username,
+      //   durationInMin: Number(task.durationInMin),
+      //   approxpomo: Number(task.approxpomo)
+      // };
+      // console.log("taskdata: ",taskData);
+      // console.log("taks nanna: ",task);
+      await axios.post("http://localhost:5000/add", generatedTasks, { headers: {
+    "Content-Type": "application/json"
+  },withCredentials: true });
   // });
 
-  //   await Promise.all(taskPromises);
+    // await Promise.all(taskPromises);
     alert("Study plan generated and saved successfully!");
 
   } catch (error) {

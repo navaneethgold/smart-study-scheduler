@@ -8,15 +8,16 @@ const cohere = new CohereClient({
 });
 
 const generateStudyPlan = async (selectedData, date, perday) => {
-  const prompt = `You are a smart AI that creates efficient study plans.
+  console.log(date);
+  const prompt = `You are a smart AI that creates efficient and realistic study plans for students.
 
-The user can spend ${perday} hours a day studying. The exam is on ${date}.
+The user has an exam on ${date} and is able to study ${perday} hours each day.
 
-The user selected the following topics:
+The user has selected the following topics to prepare:
 
 ${selectedData.map(sub => `Subject: ${sub.subject}\nChapters:\n${sub.subtopics.map(t => `- ${t}`).join('\n')}`).join('\n\n')}
 
-Please generate a study plan as an array of JavaScript objects, one for each chapter. Each object should look like this:
+Your task is to generate a study plan **as a valid JavaScript array of plain objects** — one object for each chapter — like this:
 
 {
   subject: "subject name",
@@ -26,22 +27,33 @@ Please generate a study plan as an array of JavaScript objects, one for each cha
   done: false
 }
 
-Ensure that total daily study time does not exceed ${perday} hours. Distribute chapters evenly and realistically until the exam date. Do NOT include 'username' or 'createdAt'.`;
+Output **only** the array (do NOT write any code, explanation, or extra text). No variables like 'let', 'const', or console logs. No comments. No markdown.
+
+Just return a raw JSON-compatible array of objects that I can directly insert into MongoDB.
+
+Rules:
+- Total study time per day must not exceed ${perday} hours (i.e., ${perday * 60} minutes).
+- Distribute the study load evenly and realistically over the available days.
+- Duration and pomodoros should be practical for each topic.
+- Do NOT include any extra fields like 'username', 'createdAt', or 'id'.
+
+Remember: return ONLY a clean array of task objects.`;
 
 
-  const response = await cohere.generate({
+  const response = await cohere.chat({
     model: 'command-r',
-    prompt,
-    max_tokens: 500,
+    message:prompt,
+    // max_tokens: 500,
     temperature: 0.7,
   });
 
-  return response.body.generations[0].text.trim();
+  return response.text.trim();
 };
 
 router.post("/generate-plan", async (req, res) => {
-  const { topics, examDate, dailyHours } = req.body;
-  const plan = await generateStudyPlan(topics, examDate, dailyHours);
+  const { selectedData, date, perday } = req.body;
+  const plan = await generateStudyPlan(selectedData, date, perday);
+  // console.log(plan);
   res.json({ plan });
 });
 
