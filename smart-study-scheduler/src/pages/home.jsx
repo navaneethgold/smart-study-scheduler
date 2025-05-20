@@ -54,22 +54,25 @@ export default function Home() {
     <>
       <div className="head">
         {isLogged ? (
-            <div className='head'>
+            <div className='head2'>
               <h2>Welcome, {userdata.username}!</h2>
               <p>{userdata.studying}</p>
             </div>
           ) : (
-            <>
-              <button onClick={signup}>Signup</button>
-              <button onClick={logins}>Login</button>
-            </>
+            <div className='sl'>
+              <div className='log' onClick={signup}>Signup/</div>
+              <div className='log' onClick={logins}>Login</div>
+            </div>
           )}
       </div>
-      <div style={{ padding: "20px" }}>
-        {tasks.map(task => (
-          <TaskCard key={task._id} task={task} />
-        ))}
+      <div className="remain">
+        <div style={{ padding: "20px" }} >
+          {tasks.map(task => (
+            <TaskCard key={task._id} task={task} />
+          ))}
       </div>
+      </div>
+      
     </>
   );
 }

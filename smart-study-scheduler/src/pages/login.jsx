@@ -41,13 +41,13 @@ const Login = () => {
   return (
     <div className="outer">
     <div className="card">
-    {/* // <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4 }}> */}
-      <h1 className='heading'>Login to TimeTuner</h1>
+    <div className="tala"><h1 className='heading'>Login to TimeTuner</h1></div>
+      <div className="dabba">
       <form onSubmit={handleSubmit}>
         <Box sx={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center'}}>
           <Box sx={{ display: 'flex', alignItems: 'flex-end',padding:'10px' }}>
             <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-            <TextField id="input-with-sx" label="Username" variant="standard" name="username" value={formData.username} onChange={handleChange} required style={{width:'500px'}} color='#273F4F'/>
+            <TextField id="input-with-sx" label="Username" variant="standard" name="username" value={formData.username} onChange={handleChange} required color='#273F4F'/>
           </Box>
           <Box sx={{ display: 'flex', alignItems: 'flex-end', mt: 2 ,padding:'10px'}}>
               <LockIcon sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
@@ -61,23 +61,35 @@ const Login = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                style={{ width: '500px' }}
+                // style={{ width: '500px' }}
               />
           </Box>
           
           <button
             type="submit"
-            style={{width:'400px'}}
+            // style={{width:'400px'}}
             className='sub'
           >
             Login
           </button>
         </Box>
         
+
+        
       </form>
-    {/* // </Box> */}
+      
+      </div>
+    </div>
+    <div className="logo">
+      <div className='logo2'>
+          <img src="/Icon.png" alt="icon" id='icon'/>
+      </div>
+      <div className="txt">
+        <h1>Welcome Back to TimeTuner</h1>
+      </div>
     </div>
     </div>
+    
   );
 };
 

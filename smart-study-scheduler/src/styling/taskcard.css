@@ -1,0 +1,5 @@
+#mybox{
+    background: linear-gradient(to right,#1c1c1c,#1c1c1c, #000000,#1c1c1c, #1c1c1c);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

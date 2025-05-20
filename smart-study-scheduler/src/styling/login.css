@@ -1,20 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap');
-.outer{
-    width: 100%;
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    overflow-x: hidden;
+}
+
+.outer {
+    width: 100vw;
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    gap: 400px;
     align-items: center;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    justify-content: center;
+    background: linear-gradient(to right, #0b1c23, #2b4b56, #9bb9c5);
+    overflow: hidden;
 }
+
 .card{
-    width: 40%;
+    width: 100%;
+    max-width: 400px;
+    padding: 2rem;
+    margin: 1rem;
+    height: auto;
+    /* width: 30%; */
+    /* height: 40%; */
+    /* margin-right: 0; */
+    /* margin-left: 3rem; */
     background-color: rgba(185, 235, 142, 0.7);
     border: 5px solid #b47962;
-    align-items: flex-start;
-    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    /* align-items: flex-start; */
+    /* padding: 3rem; */
     font-family: 'Montserrat', sans-serif; /* Headings */
     border-radius: 15px;
+    box-shadow: 0 0 10px #7fff00;
     transition: transform 0.3s ease,box-shadow 0.3s ease;
 }
 .card:hover{
@@ -48,4 +71,37 @@
 }
 .sub:active{
     transform: scale(0.95);
+}
+#input-with-sx,#password-input{
+    width: 23vw;
+}   
+button{
+    width: 18vw;
+}
+#icon{
+    /* transform: scale(0.35); */
+    width: 287px;
+    height: 287px;
+}
+.logo{
+    display: flex;
+    flex-direction: column;
+}
+.logo2{
+    width: 300px;
+    height: 300px;
+    align-items: flex-start;
+}
+.txt{
+    margin: 2rem;
+    color: black;
+}
+
+@media (max-width:480px){
+    .heading{
+        font-size:large;
+    }
+    .card{
+        padding: 2rem;
+    }
 }

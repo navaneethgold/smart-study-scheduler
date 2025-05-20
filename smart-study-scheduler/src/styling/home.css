@@ -2,3 +2,34 @@
     margin: 0;
     padding: 0;
 }
+body,html{
+    height: 100vh;
+}
+.head{
+    width: 100%;
+    height: 13%;
+    background-color: black;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sl{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 35px;
+}
+.log{
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+.log:hover{
+    cursor: pointer;
+}
+
+.remain{
+    height: 87%;
+    background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
+}

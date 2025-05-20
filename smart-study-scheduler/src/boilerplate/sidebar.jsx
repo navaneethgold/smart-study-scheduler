@@ -16,7 +16,9 @@ export default function Sidebar(){
     }
     return(
         <div className="sidebar">
-            {/* <div className="subs"> */}
+                <div className="icon">
+                    <img src="/Icon.png" alt="icon" className="icon2"/>
+                </div>
                 <div className="home" onClick={hhome}>
                     <h4>Home</h4>
                 </div>
