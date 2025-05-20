@@ -5,15 +5,19 @@
 body,html{
     height: 100vh;
 }
-.head{
-    width: 100%;
-    height: 13%;
-    background-color: black;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.head {
+  position: fixed;
+  top: 0;
+  left: 225px;
+  width: calc(100% - 225px); /* Take remaining width */
+  height: 13vh;               /* better than 13% for consistent sizing */
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it’s above other elements */
 }
+
 .sl{
     width: 100%;
     display: flex;
@@ -32,4 +36,15 @@ body,html{
 .remain{
     height: 87%;
     background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
+    position: fixed;
+    left: 225px;
+    right: 0;
+    top: 13%;
+    bottom: 0;
+    overflow-y: auto;
 }
+/* .full{
+    position: fixed;
+    left: 225px;
+    right: 0;
+} */

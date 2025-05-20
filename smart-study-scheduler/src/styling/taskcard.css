@@ -1,5 +1,66 @@
-#mybox{
+#mycard{
     background: linear-gradient(to right,#1c1c1c,#1c1c1c, #000000,#1c1c1c, #1c1c1c);
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+#outer{
+    display: flex;
+    flex-direction: column;
+}
+
+#mybox{
+    width: 500px;
+    height: 243px;
+    margin: 2rem;
+    margin-bottom: 3rem;
+    /* display: flex;
+    flex-direction: row; */
+}
+
+.label,.value{
+    color: white;
+    font-size: large;
+    padding: 0.4rem;
+}
+.label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+    color: white;
+    font-weight: bold;
+}
+
+.value{
+    margin-left: 1.5rem;
+    margin-bottom: 8px;
+
+}
+.info-labels,.info-values{
+    display: flex;
+    flex-direction: column;
+}
+.inner{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.timer{
+    color: white;
+    margin: 4rem;
+}
+
+button{
+    padding: 0.3rem;
+    /* width: 10px; */
+    border: none;
+    border-radius: 10px;
+}
+button:hover{
+    cursor: pointer;
 }
