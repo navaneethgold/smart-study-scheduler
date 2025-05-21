@@ -7,6 +7,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    transition: transform 0.3s ease;
+}
+#mycard:hover{
+    transform: scale(1.05);
 }
 #outer{
     display: flex;
@@ -63,4 +67,10 @@ button{
 }
 button:hover{
     cursor: pointer;
+}
+#all{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+    gap: 10px; 
 }
