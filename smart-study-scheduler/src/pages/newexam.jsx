@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Checkbox, FormControlLabel, Button, Box, Typography } from "@mui/material";
+import { Checkbox, FormControlLabel, Button, Box, Typography, TextField } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import "../styling/newexam.css";
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
@@ -11,6 +11,9 @@ const NewExam = () => {
   const [isLogged,setIsLogged]=useState(null);
   const [userData,setUserdata]=useState({});
   const [summaryText, setSummaryText] = useState("");
+  const [examDate, setExamDate] = useState("");
+  const [hoursperday, setHoursPerDay] = useState("");
+
   useEffect(()=>{
     const checkAuth=async()=>{
       try{
@@ -79,8 +82,8 @@ const NewExam = () => {
     subtopics: data.subtopics.filter(st => st.checked).map(st => st.name)
   })).filter(s => s.subtopics.length > 0);
 
-  const date = "June 4th 2025";
-  const perday = "10 hours";
+  const date = examDate;
+  const perday = hoursperday + " hours";
   try {
     const response = await axios.post(
       "http://localhost:5000/generate-plan",
@@ -130,6 +133,26 @@ const summarizeit=async()=>{
       <div id="out">
       <div id="inside">
       <div id="cont"><h2>Choose Topics for Exam</h2></div>
+      <Box sx={{ mb: 2 }} className="input-pair">
+            <TextField
+              type="date"
+              label="Exam Date"
+              // InputLabelProps={{ shrink: true }}
+              placeholder="Exam date"
+              value={examDate}
+              color="white"
+              onChange={(e) => setExamDate(e.target.value)}
+              sx={{ mr: 2 }}
+            />
+            <TextField
+              type="number"
+              label="Hours Per Day"
+              color="white"
+              // InputProps={{ inputProps: { min: 1, max: 24 } }}
+              value={hoursperday}
+              onChange={(e) => setHoursPerDay(e.target.value)}
+            />
+          </Box>
       <div className="rem">
       {Object.entries(selectedSubjects).map(([subjectName, data], idx) => (
         <Box key={idx} sx={{ mb: 2, pl: 1 }}>

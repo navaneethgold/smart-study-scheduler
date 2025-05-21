@@ -1,31 +1,75 @@
-#exam{
-    position: fixed;
-    top: 13%;
-    left: 225px;
-    height: 87%;
-    overflow-y: auto;
-    bottom: 0;
-    right: 0;
-    background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
-    padding: 4rem;
-    
-    
+/* Make the entire exam container scrollable and clean */
+#exam {
+  position: fixed;
+  top: 13%;
+  left: 225px;
+  height: 87%;
+  overflow-y: auto;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
+  padding: 4rem;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
 }
-#out{
-    display: flex;
-    flex-direction: row;
-    background: linear-gradient(to right,#1c1c1c,#1c1c1c, #000000,#1c1c1c, #1c1c1c);
+
+/* Scrollbar styling for Webkit browsers */
+#exam::-webkit-scrollbar {
+  width: 8px;
 }
-#inside{
-    padding: 3rem;
-    color: white;
-    border-radius: 10px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
+#exam::-webkit-scrollbar-track {
+  background: transparent;
 }
-.aisum{
-    color: white;
-    padding: 3rem;
+#exam::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 4px;
+}
+
+/* Main container layout */
+#out {
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(to right, #1c1c1c, #1c1c1c, #000000, #1c1c1c, #1c1c1c);
+}
+
+/* Inner card-like section */
+#inside {
+  padding: 3rem;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex: 2;
+  padding-right: 0;
+}
+
+/* Motivational summary styling */
+.aisum {
+  color: white;
+  padding: 3rem;
+  flex: 1;
+  max-width: 400px;
+  padding-left: 0;
+  overflow-y: auto;
+}
+
+/* Style for the exam date and hours inputs */
+.input-pair {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.input-pair .MuiTextField-root {
+  background-color: #fff;
+  border-radius: 8px;
+  min-width: 200px;
+}
+
+/* Optional: Text inside MUI inputs */
+.MuiInputBase-input {
+  color: black;
 }
