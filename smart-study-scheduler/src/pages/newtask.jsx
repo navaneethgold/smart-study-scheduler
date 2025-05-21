@@ -29,8 +29,7 @@ const AddTaskForm = () => {
   const [formData, setFormData] = useState({
     subject: "",
     chapter: "",
-    durationInMin: "",
-    approxpomo: ""
+    durationInMin: ""
   });
 
   const handleChange = (e) => {
@@ -44,7 +43,6 @@ const AddTaskForm = () => {
       let tasks = {
         ...formData,
         durationInMin: Number(formData.durationInMin),
-        approxpomo: Number(formData.approxpomo),
         done:false
       };
       console.log(tasks);
@@ -53,7 +51,7 @@ const AddTaskForm = () => {
     "Content-Type": "application/json"
   },withCredentials: true });
       alert("Task added successfully");
-      setFormData({ subject: "", chapter: "", durationInMin: "", approxpomo: "" });
+      setFormData({ subject: "", chapter: "", durationInMin: "" });
     } catch (err) {
       console.error("Error adding task", err);
       alert("Something went wrong");
@@ -99,19 +97,6 @@ const AddTaskForm = () => {
             type="number"
             placeholder="Duration (minutes)"
             value={formData.durationInMin}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className="input-group">
-          <label htmlFor="pomodoros">Pomodoros:</label>
-          <input
-            id="pomodoros"
-            name="approxpomo"
-            type="number"
-            placeholder="Pomodoros"
-            value={formData.approxpomo}
             onChange={handleChange}
             required
           />

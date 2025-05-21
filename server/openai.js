@@ -23,7 +23,6 @@ Your task is to generate a study plan **as a valid JavaScript array of plain obj
   subject: "subject name",
   chapter: "chapter name",
   durationInMin: estimated time in minutes,
-  approxpomo: estimated pomodoros,
   done: false
 }
 
@@ -34,7 +33,7 @@ Just return a raw JSON-compatible array of objects that I can directly insert in
 Rules:
 - Total study time per day must not exceed ${perday} hours (i.e., ${perday * 60} minutes).
 - Distribute the study load evenly and realistically over the available days.
-- Duration and pomodoros should be practical for each topic.
+- Duration should be practical for each topic.
 - Do NOT include any extra fields like 'username', 'createdAt', or 'id'.
 
 Remember: return ONLY a clean array of task objects.`;

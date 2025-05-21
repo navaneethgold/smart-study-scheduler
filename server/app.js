@@ -61,14 +61,14 @@ app.post("/add", async (req, res) => {
     console.log(tasks);
     const savedTasks = [];
     for (const task of tasks) {
-      const { subject, chapter, durationInMin, approxpomo } = task;
+      const { subject, chapter, durationInMin } = task;
 
       const taskData = {
         username: req.user.username, // assuming user is attached via middleware
         subject,
         chapter,
         durationInMin,
-        approxpomo,
+        approxpomo:Math.ceil(durationInMin/30),
       };
 
       const newTask = new Task(taskData);
@@ -166,7 +166,8 @@ app.put("/:id/pomo-complete", async (req, res) => {
     await currtask.save();
 
     if (currtask.approxpomo === 0) {
-      return res.redirect(`/${id}/delete`);
+      currtask.done=true;
+      await currtask.save();
     } else {
       return res.status(200).json({ message: "Pomodoro completed", task: currtask });
     }
@@ -186,6 +187,23 @@ app.delete("/:id/delete", async (req, res) => {
 
     await task.deleteOne({ _id: id });
     return res.status(200).json({ message: "Task deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+app.put("/:id/complete", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currtask = await task.findById(id);
+    if (!currtask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+    currtask.done=true;
+    await currtask.save();
+    return res.status(200).json({ message: "Task updated successfully" });
   } catch (error) {
     console.error("Error deleting task:", error);
     res.status(500).json({ message: "Server error" });

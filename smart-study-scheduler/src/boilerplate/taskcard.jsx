@@ -35,7 +35,7 @@ export default function TaskCard({ task }) {
 
   const startTimer = async () => {
     if(task.approxpomo<=0){
-      await axios.delete(`http://localhost:5000/${task._id}/delete`);
+      await axios.put(`http://localhost:5000/${task._id}/complete`);
       return;
     }
     if (!task.endTime) {
