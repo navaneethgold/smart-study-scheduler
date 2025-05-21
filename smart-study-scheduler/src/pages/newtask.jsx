@@ -2,7 +2,7 @@
 import React, { useState,useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import "../styling/newtask.css"
 const AddTaskForm = () => {
   const [isLogged,setIsLogged]=useState(null);
   const [userData,setUserdata]=useState({});
@@ -27,7 +27,6 @@ const AddTaskForm = () => {
     checkAuth();
   },[]);
   const [formData, setFormData] = useState({
-    username:"",
     subject: "",
     chapter: "",
     durationInMin: "",
@@ -42,13 +41,17 @@ const AddTaskForm = () => {
     e.preventDefault();
     try {
       
-      const taskData = {
+      let tasks = {
         ...formData,
-        username:userData.username,
         durationInMin: Number(formData.durationInMin),
-        approxpomo: Number(formData.approxpomo)
+        approxpomo: Number(formData.approxpomo),
+        done:false
       };
-      await axios.post("http://localhost:5000/add", taskData);
+      console.log(tasks);
+      tasks=[tasks];
+      await axios.post("http://localhost:5000/add", tasks, { headers: {
+    "Content-Type": "application/json"
+  },withCredentials: true });
       alert("Task added successfully");
       setFormData({ subject: "", chapter: "", durationInMin: "", approxpomo: "" });
     } catch (err) {
@@ -58,13 +61,72 @@ const AddTaskForm = () => {
   };
 
   return (
+    <div className="manual">
+  <div className="caard">
+    <div className="top">Add Task Manually</div>
+
     <form onSubmit={handleSubmit} style={{ padding: "1rem" }}>
-      <input name="subject" placeholder="Subject" value={formData.subject} onChange={handleChange} required />
-      <input name="chapter" placeholder="Chapter" value={formData.chapter} onChange={handleChange} required />
-      <input name="durationInMin" type="number" placeholder="Duration (minutes)" value={formData.durationInMin} onChange={handleChange} required />
-      <input name="approxpomo" type="number" placeholder="Pomodoros" value={formData.approxpomo} onChange={handleChange} required />
-      <button type="submit">Add Task</button>
+      <div className="form-fields">
+        <div className="input-group">
+          <label htmlFor="subject">Subject:</label>
+          <input
+            id="subject"
+            name="subject"
+            placeholder="Subject"
+            value={formData.subject}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="chapter">Chapter:</label>
+          <input
+            id="chapter"
+            name="chapter"
+            placeholder="Chapter"
+            value={formData.chapter}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="duration">Duration:</label>
+          <input
+            id="duration"
+            name="durationInMin"
+            type="number"
+            placeholder="Duration (minutes)"
+            value={formData.durationInMin}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="input-group">
+          <label htmlFor="pomodoros">Pomodoros:</label>
+          <input
+            id="pomodoros"
+            name="approxpomo"
+            type="number"
+            placeholder="Pomodoros"
+            value={formData.approxpomo}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="but">
+          <button type="submit">➕ Add Task</button>
+        </div>
+      </div>
     </form>
+  </div>
+</div>
+
+
+    
   );
 };
 

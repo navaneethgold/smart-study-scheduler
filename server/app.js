@@ -55,18 +55,9 @@ app.use("/", generateStudyPlanRouter); // ✅ Now works properly
 
 app.post("/add", async (req, res) => {
   try {
-    // let tasks = req.body; // Expecting an array of task objects
     console.log(req.body);
     let tasks=req.body;
-    // const rawKey = Object.keys(req.body)[0];
-    // tasks = JSON.parse(rawKey);
     console.log(tasks);
-    // if(tasks.length<=1){
-    //     tasks = Array.isArray(tasks) ? tasks : [tasks];
-    // }
-
-    // console.log(tasks);
-    // console.log("subjec: ",tasks)
     const savedTasks = [];
     for (const task of tasks) {
       const { subject, chapter, durationInMin, approxpomo } = task;
