@@ -20,6 +20,38 @@
     /* position: fixed; */
     
 }
+.head {
+  position: fixed;
+  top: 0;
+  left: 225px;
+  width: calc(100% - 225px); /* Take remaining width */
+  height: 13vh;               /* better than 13% for consistent sizing */
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it’s above other elements */
+}
+ .head2{
+    width: 100%;
+    color :white;
+    text-align: end;
+    padding: 3rem;
+ }
+ .sl{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin: 35px;
+}
+.log{
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+.log:hover{
+    cursor: pointer;
+}
 /* .subs{
   padding: 20px;
 } */
@@ -57,4 +89,17 @@
 }
 .icon{
   align-items: flex-start;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.icon:hover{
+  cursor: pointer;
+}
+#txt2{
+  color:white;
+}
+#txt{
+  padding: 1rem;
 }

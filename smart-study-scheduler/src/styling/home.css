@@ -5,33 +5,8 @@
 body,html{
     height: 100vh;
 }
-.head {
-  position: fixed;
-  top: 0;
-  left: 225px;
-  width: calc(100% - 225px); /* Take remaining width */
-  height: 13vh;               /* better than 13% for consistent sizing */
-  background-color: black;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Make sure it’s above other elements */
-}
 
-.sl{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin: 35px;
-}
-.log{
-    padding: 0;
-    background-color: black;
-    color: white;
-}
-.log:hover{
-    cursor: pointer;
-}
+
 
 .remain{
     height: 87%;

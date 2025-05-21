@@ -1,0 +1,31 @@
+#exam{
+    position: fixed;
+    top: 13%;
+    left: 225px;
+    height: 87%;
+    overflow-y: auto;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
+    padding: 4rem;
+    
+    
+}
+#out{
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(to right,#1c1c1c,#1c1c1c, #000000,#1c1c1c, #1c1c1c);
+}
+#inside{
+    padding: 3rem;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+.aisum{
+    color: white;
+    padding: 3rem;
+}

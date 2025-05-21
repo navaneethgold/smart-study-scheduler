@@ -50,6 +50,36 @@ Remember: return ONLY a clean array of task objects.`;
   return response.text.trim();
 };
 
+const summarizeai=async(allSubjects)=>{
+  const prompt = `You are a smart and encouraging AI mentor helping students stay motivated and understand their study priorities.
+${allSubjects.map(sub => `Subject: ${sub.subject}\nChapters:\n${sub.subtopics.map(t => `- ${t}`).join('\n')}`).join('\n\n')}
+
+Your task is to return a **motivational summary about the subjects** about the subjects and their subtopics. For each subject:
+- Briefly describe its nature (e.g., "concept-heavy", "technical", "boring at first but interesting with practice").
+- Mention any potential challenges or highlights in the subtopics.
+- Give a short motivational push or encouragement for the user to stay consistent and confident.
+
+The tone should be friendly, realistic, and energizing — like a personal coach who knows the student’s journey.
+
+Output format:
+For each subject:
+- Subject name
+- Short summary about its difficulty or vibe
+- Motivational advice to push through
+
+Do not include code, plans, arrays, or metadata — just a clean and well-written motivational summary based on the topics.`;
+
+const response = await cohere.chat({
+    model: 'command-r',
+    message:prompt,
+    // max_tokens: 500,
+    temperature: 0.7,
+  });
+
+  return response.text.trim();
+
+};
+
 router.post("/generate-plan", async (req, res) => {
   const { selectedData, date, perday } = req.body;
   const plan = await generateStudyPlan(selectedData, date, perday);
@@ -57,4 +87,9 @@ router.post("/generate-plan", async (req, res) => {
   res.json({ plan });
 });
 
+router.post("/summarize",async(req,res)=>{
+  const{allSubjects}=req.body;
+  const summary=await summarizeai(allSubjects);
+  res.json({ summary });
+})
 module.exports = router; // ✅ CommonJS export

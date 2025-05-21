@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Checkbox, FormControlLabel, Button, Box, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
+import "../styling/newexam.css";
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 const NewExam = () => {
   const [subjects, setSubjects] = useState([]);
   const [selectedSubjects, setSelectedSubjects] = useState({});
   const navigate = useNavigate();
   const [isLogged,setIsLogged]=useState(null);
   const [userData,setUserdata]=useState({});
+  const [summaryText, setSummaryText] = useState("");
   useEffect(()=>{
     const checkAuth=async()=>{
       try{
@@ -47,6 +49,11 @@ const NewExam = () => {
         console.error(err);
       });
   }, []);
+  useEffect(() => {
+      if (subjects.length > 0) {
+        summarizeit();
+      }
+    }, [subjects]);
 
   const toggleSubject = (subjectName) => {
     const updated = { ...selectedSubjects };
@@ -74,9 +81,7 @@ const NewExam = () => {
 
   const date = "June 4th 2025";
   const perday = "10 hours";
-  // console.log(selectedData);
   try {
-    // Step 1: Send selected topics to backend for AI generation
     const response = await axios.post(
       "http://localhost:5000/generate-plan",
       { selectedData, date, perday },
@@ -84,30 +89,13 @@ const NewExam = () => {
     );
     
     const data = response.data;
-    // console.log(data.plan);
-    // console.log(typeof data.plan,data.plan);
     let generatedTasks = data.plan; // assuming backend returns { tasks: [...] }
-    // for(let i=0;i<generatedTasks.length;i++){
-    //     const task=generatedTasks[i];
-    //     await axios.post("http://localhost:5000/add", task, { withCredentials: true });
-    // }
-    // generatedTasks = Array.isArray(data.plan) ? data.plan : [data.plan];
     console.log("ide na:",generatedTasks);
-    // const taskPromises = generatedTasks.map(task =>{
-      // let taskData = {
-      //   ...task,
-      //   username:userData.username,
-      //   durationInMin: Number(task.durationInMin),
-      //   approxpomo: Number(task.approxpomo)
-      // };
-      // console.log("taskdata: ",taskData);
-      // console.log("taks nanna: ",task);
       await axios.post("http://localhost:5000/add", generatedTasks, { headers: {
     "Content-Type": "application/json"
   },withCredentials: true });
   // });
 
-    // await Promise.all(taskPromises);
     alert("Study plan generated and saved successfully!");
 
   } catch (error) {
@@ -116,10 +104,33 @@ const NewExam = () => {
   }
 };
 
+const summarizeit=async()=>{
+  const allSubjects = subjects.map(subject => ({
+    subject: subject.subjectName,
+    subtopics: subject.subtopics
+  }));
+
+   try {
+    const response = await axios.post("http://localhost:5000/summarize", {
+      allSubjects,
+    }, { withCredentials: true });
+
+    // alert("Motivational summary generated!");
+    console.log(response.data.summary); // Show this in UI if needed
+    setSummaryText(response.data.summary);
+
+  } catch (err) {
+    console.error("Failed to generate summary:", err);
+  }
+}
+
 
   return (
-    <Box sx={{ mx: 'auto', mt: 4, width: "80%" }}>
-      <Typography variant="h4" gutterBottom>Choose Topics for Exam</Typography>
+    <div id="exam">
+      <div id="out">
+      <div id="inside">
+      <div id="cont"><h2>Choose Topics for Exam</h2></div>
+      <div className="rem">
       {Object.entries(selectedSubjects).map(([subjectName, data], idx) => (
         <Box key={idx} sx={{ mb: 2, pl: 1 }}>
           <FormControlLabel
@@ -127,6 +138,7 @@ const NewExam = () => {
               <Checkbox
                 checked={data.checked}
                 onChange={() => toggleSubject(subjectName)}
+                sx={{color:"#7fff00"}}
               />
             }
             label={<strong>{subjectName}</strong>}
@@ -139,6 +151,7 @@ const NewExam = () => {
                   <Checkbox
                     checked={sub.checked}
                     onChange={() => toggleSubtopic(subjectName, i)}
+                    sx={{color:"#7fff00"}}
                   />
                 }
                 label={sub.name}
@@ -147,8 +160,20 @@ const NewExam = () => {
           </Box>
         </Box>
       ))}
-      <Button variant="contained" color="primary" onClick={generatePlan}>Generate Study Plan</Button>
-    </Box>
+      </div>
+      <div id="final"><Button variant="contained" color="primary" onClick={generatePlan} sx={{width:"20rem"}}><AutoAwesomeIcon sx={{margin:"0.5rem"}}/>Generate Study Plan using AI</Button></div>
+      {/* <div className="gen"><Button variant="contained" color="primary" onClick={summarizeit} sx={{width:"20rem"}}>summarize</Button></div> */}
+      </div>
+      <div className="aisum">
+        {summaryText && (
+          <div className="summary-box">
+            <h3>Motivational Summary</h3>
+            <p>{summaryText}</p>
+          </div>
+        )}
+      </div>
+      </div>
+    </div>
   );
 };
 
