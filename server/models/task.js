@@ -11,6 +11,7 @@ const taskSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  endTime:{type:Date, required:false,default:null}
 });
 
 module.exports = mongoose.model("Task", taskSchema);

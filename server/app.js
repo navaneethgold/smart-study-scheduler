@@ -48,6 +48,7 @@ async function main(){
 }
 
 const generateStudyPlanRouter = require("./openai"); // ✅ CommonJS import
+// const task = require("./models/task");
 
 app.use("/", generateStudyPlanRouter); // ✅ Now works properly
 
@@ -152,6 +153,84 @@ app.post('/logout', (req, res) => {
   });
 });
 
+app.put("/:id/pomo-complete", async (req, res) => {
+  try {
+    const { id } = req.params;
+    let currtask = await task.findById(id);
+    if (!currtask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    currtask.approxpomo -= 1;
+    currtask.durationInMin -= 30;
+    await currtask.save();
+
+    if (currtask.approxpomo === 0) {
+      return res.redirect(`/${id}/delete`);
+    } else {
+      return res.status(200).json({ message: "Pomodoro completed", task: currtask });
+    }
+  } catch (error) {
+    console.error("Error marking pomodoro complete:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+app.delete("/:id/delete", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currtask = await task.findById(id);
+    if (!currtask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    await task.deleteOne({ _id: id });
+    return res.status(200).json({ message: "Task deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+app.put("/:id/setEnd", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const currtask = await task.findById(id);
+    if (!currtask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    currtask.endTime = new Date(Date.now() + 1 * 60 * 1000); // 30 minutes from now
+    await currtask.save();
+
+    res.status(200).json({ message: "Timer updated", endTime: currtask.endTime });
+  } catch (error) {
+    console.error("Error setting endTime:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
+
+app.put("/:id/clearEnd", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const currtask = await task.findById(id);
+    if (!currtask) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    currtask.endTime = null; // 30 minutes from now
+    await currtask.save();
+
+    res.status(200).json({ message: "Timer updated", endTime: currtask.endTime });
+  } catch (error) {
+    console.error("Error setting endTime:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 
 const PORT = process.env.PORT || 5000;
