@@ -84,6 +84,8 @@ const NewExam = () => {
 
   const date = examDate;
   const perday = hoursperday + " hours";
+  console.log(date);
+  console.log(perday);
   try {
     const response = await axios.post(
       "http://localhost:5000/generate-plan",
@@ -133,11 +135,10 @@ const summarizeit=async()=>{
       <div id="out">
       <div id="inside">
       <div id="cont"><h2>Choose Topics for Exam</h2></div>
-      <Box sx={{ mb: 2 }} className="input-pair">
+      {/* <Box sx={{ mb: 2 }} className="input-pair">
             <TextField
               type="date"
               label="Exam Date"
-              // InputLabelProps={{ shrink: true }}
               placeholder="Exam date"
               value={examDate}
               color="white"
@@ -148,11 +149,34 @@ const summarizeit=async()=>{
               type="number"
               label="Hours Per Day"
               color="white"
-              // InputProps={{ inputProps: { min: 1, max: 24 } }}
               value={hoursperday}
               onChange={(e) => setHoursPerDay(e.target.value)}
             />
-          </Box>
+          </Box> */}
+        <div className="inp">
+          <div className="inp1">
+            <div className="ed"><h4>Exam Date: </h4></div>
+            <div className="edi"><input type="date" name="Exam Date" id="day" onChange={(e)=>{setExamDate(e.target.value)}} value={examDate}/></div>
+          </div>
+          <div className="inp2">
+            <div className="ed"><h4>No. of hours per day:</h4></div>
+            <div className="edi">
+              <select
+                name="hours per day"
+                id="hpd"
+                onChange={(e) => setHoursPerDay(Number(e.target.value))}
+                value={hoursperday}
+              >
+                {[...Array(24)].map((_, i) => (
+                  <option key={i + 1} value={i + 1}>
+                    {i + 1} hour{i === 0 ? '' : 's'}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+        </div>
       <div className="rem">
       {Object.entries(selectedSubjects).map(([subjectName, data], idx) => (
         <Box key={idx} sx={{ mb: 2, pl: 1 }}>
