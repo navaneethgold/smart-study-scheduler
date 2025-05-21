@@ -20,7 +20,7 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button onClick={handleLogout} id='logout'>Logout</button>
   );
 };
 

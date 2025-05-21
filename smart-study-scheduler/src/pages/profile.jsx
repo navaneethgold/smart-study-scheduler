@@ -2,48 +2,68 @@ import React,{useState,useEffect} from "react";
 import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import Logout from "./logout";
+import "../styling/profile.css";
 const Myprofile=()=>{
-    const [isLogged, setIsLogged] = useState(null);
-    const [userdata, setUserdata] = useState({});
-    const navigate=useNavigate();
-    useEffect(() => {
-    const checkAuth = async () => {
-      try {
-        const res = await axios.get("http://localhost:5000/check-auth", {
-          withCredentials: true,
+  const[userData,setuserData]=useState({});
+  const[isLogged,setIsLogged]=useState(null);
+  const navigate=useNavigate();
+  useEffect(()=>{
+    const checkAuth=async()=>{
+      try{
+        const res=await axios("http://localhost:5000/check-auth",{
+          withCredentials:true,
         });
-        setIsLogged(res.data.isAuthenticated);
-        if (res.data.isAuthenticated) {
-          setUserdata(res.data.user); // optional: show user info
+        if(res.data.isAuthenticated){
+          setuserData(res.data.user);
+          setIsLogged(true);
+        }else{
+          setIsLogged(false);
         }
-      } catch (err) {
+      }catch(err){
         console.error("Auth check failed", err);
-        setIsLogged(false);
       }
     };
     checkAuth();
-  }, []);
-    const signup=()=>{
-        navigate("/signup");
-    }
-    const logins=()=>{
-        navigate("/login");
-    }
+  },[]);
+  
     return(
+        <div className="alldata">
+  {isLogged ? (
+    <div className="cards">
+      {userData && (
         <>
-          {isLogged ? (
-            <div>
-              <h2>Welcome, {userdata.username}!</h2>
-              <p>Studying: {userdata.studying}</p>
-              <Logout/>
+          <div className="top-row">
+            <h1 className="main-heading">Welcome, {userData.username}!</h1>
+            <div id="logout">
+              <Logout />
             </div>
-          ) : (
-            <>
-              <button onClick={signup}>Signup</button>
-              <button onClick={logins}>Login</button>
-            </>
-          )}
+          </div>
+          <h2 className="sub-heading">Currently Studying</h2>
+          <div className="content-box">{userData.studying}</div>
+
+          <h2 className="sub-heading">Your Subjects</h2>
+          <div className="subjects-box">
+            <ul>
+              {userData.subjects.map((sub, index) => (
+                <li key={index}>
+                  <span className="subject-title">{sub.subjectName}</span>
+                  <ul className="subtopics-list">
+                    {sub.subtopics.map((subt, ind) => (
+                      <li key={ind}>{subt}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
         </>
+      )}
+    </div>
+  ) : (
+    <h1>Not Logged In</h1>
+  )}
+</div>
+
         
     )
 }
