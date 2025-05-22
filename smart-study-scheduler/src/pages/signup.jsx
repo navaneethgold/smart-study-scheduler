@@ -5,7 +5,7 @@ import {
 import AddIcon from '@mui/icons-material/Add';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom";
-
+import "../styling/signup.css";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -65,96 +65,138 @@ const Signup = () => {
       alert("Signup failed.");
     }
   };
+  const sredirec=()=>{
+    navigate("/login");
+  }
 
   return (
-    <Box sx={{ maxWidth: 700, mx: 'auto', mt: 4 }}>
-      <Typography variant="h4" gutterBottom>Sign Up</Typography>
+    <div className='spage'>
+      <div className="slogo">
+        <div className="simg"><img src="/Icon.png" alt="icon" id='sicon'/></div>
+        <div className="stxts">
+          <div className="stxt5">
+            <div id='stext6'>Welcome to TimeTuner</div>
+          </div>
+          <div className="stxt1">
+            <div id='stext7'>Where Your Time Meets Precision</div>
+          </div>
+        </div>
+      </div>
       <form onSubmit={handleSubmit}>
-        <TextField
-          fullWidth
-          label="Username (Email)"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-        <TextField
-          fullWidth
-          label="Password"
-          name="password"
-          type="password"
-          value={formData.password}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
-        <TextField
-          fullWidth
-          label="Studying (e.g., BTech CSE)"
-          name="studying"
-          value={formData.studying}
-          onChange={handleChange}
-          margin="normal"
-          required
-        />
+        <div className="all-shit">
+          <h2 className='talakai'>Sign Up</h2>
+          <div className="sinp">
+          {/* Headings Section */}
+          <div className="side-headings">
+            <div className="sh1">UserName</div>
+            <div className="sh1">Password</div>
+            <div className="sh1">Studying (e.g., BTech CSE)</div>
+          </div>
 
-        {formData.subjects.map((subject, subjIndex) => (
-          <Box key={subjIndex} sx={{ mt: 3, p: 2, border: '1px solid #ccc', borderRadius: 2 }}>
-            <TextField
-              fullWidth
-              label={`Subject ${subjIndex + 1} Name`}
-              value={subject.subjectName}
-              onChange={(e) =>
-                handleSubjectChange(subjIndex, 'subjectName', e.target.value)
-              }
-              required
-            />
-            <Typography variant="subtitle1" sx={{ mt: 2 }}>Subtopics:</Typography>
-            {subject.subtopics.map((subtopic, subIndex) => (
-              <TextField
-                key={subIndex}
-                fullWidth
-                label={`Subtopic ${subIndex + 1}`}
-                value={subtopic}
-                onChange={(e) =>
-                  handleSubtopicChange(subjIndex, subIndex, e.target.value)
-                }
-                sx={{ mt: 1 }}
+          {/* Inputs Section */}
+          <div className="inputs-section">
+            <div className="sinp1">
+              <input
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
                 required
               />
-            ))}
-            <Button
-              variant="text"
-              startIcon={<AddIcon />}
-              onClick={() => addSubtopic(subjIndex)}
-              sx={{ mt: 1 }}
-            >
-              Add Subtopic
-            </Button>
-          </Box>
-        ))}
+            </div>
+            <div className="sinp1">
+              <input
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="sinp1">
+              <input
+                name="studying"
+                value={formData.studying}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+        </div>
 
-        <Button
-          variant="outlined"
-          startIcon={<AddIcon />}
-          onClick={addSubject}
-          sx={{ mt: 3 }}
-        >
-          Add Another Subject
-        </Button>
+        <div className="sall-subs">
+          {formData.subjects.map((subject, subjIndex) => (
+            <div key={subjIndex} className='tala-sign'>
 
-        <Button
-          type="submit"
-          fullWidth
-          variant="contained"
-          color="primary"
-          sx={{ mt: 4 }}
-        >
-          Register
-        </Button>
+              {/* Subject Name Heading + Input */}
+              <div className="subname">
+                <div className="sub-headings">Subject {subjIndex + 1} Name</div>
+                <input
+                  value={subject.subjectName}
+                  onChange={(e) =>
+                    handleSubjectChange(subjIndex, 'subjectName', e.target.value)
+                  }
+                  required
+                />
+              </div>
+                
+              {/* Subtopics Heading + Inputs */}
+              <div className="all-subs">
+                <div className="sub-headings">Subtopics</div>
+                {subject.subtopics.map((subtopic, subIndex) => (
+                  <div key={subIndex} className="sub-inp">
+                    <div className="sub-subheadings">Subtopic {subIndex + 1}</div>
+                    <input
+                      value={subtopic}
+                      onChange={(e) =>
+                        handleSubtopicChange(subjIndex, subIndex, e.target.value)
+                      }
+                      required
+                    />
+                  </div>
+                ))}
+              </div>
+              
+              {/* Add Subtopic Button */}
+              <div className="add-but-sub">
+                <button
+                  className='mybut'
+                  onClick={() => addSubtopic(subjIndex)}
+                >
+                  <div className="amma"><AddIcon/>Add Subtopic</div>
+                </button>
+              </div>
+              
+            </div>
+          ))}
+
+        </div>
+        
+        <div className="all-buts">
+          <button
+            className='mybut'
+            onClick={addSubject}
+          >
+            <div className="amma"><AddIcon/>Add Subject</div>
+          </button>
+
+          <button
+            type="submit"
+            className='mybut2'
+          >
+            Register
+          </button>
+        </div>
+        <div className="sredir">
+            Already have an account?
+            <a onClick={sredirec} id='sredirect'>
+              Login
+            </a>
+        </div>
+        </div>
+        
+        
       </form>
-    </Box>
+    </div>
   );
 };
 
