@@ -225,7 +225,7 @@ app.put("/:id/setEnd", async (req, res) => {
     if(already.length!=findall.length){
       return res.status(403).json({ message: "Another Pomodoro is already running." });
     }
-    currtask.endTime = new Date(Date.now() + 1 * 60 * 1000); // 30 minutes from now
+    currtask.endTime = new Date(Date.now() + 30 * 60 * 1000); // 30 minutes from now
     await currtask.save();
 
     res.status(200).json({ message: "Timer updated", endTime: currtask.endTime });
