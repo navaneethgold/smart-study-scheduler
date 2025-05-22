@@ -2,9 +2,11 @@ const express = require("express");
 const { CohereClient } = require("cohere-ai");
 
 const router = express.Router();
+require('dotenv').config();
+
 
 const cohere = new CohereClient({
-  token: 'y2USBIPOx0qdwX31nuY68DLlMHMBufLsUPaJAbBV',
+  token: process.env.COHERE,
 });
 
 const generateStudyPlan = async (selectedData, date, perday) => {

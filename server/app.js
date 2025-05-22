@@ -24,9 +24,20 @@ const sessionOptions={
     },
     httpOnly:true,
 };
+const allowedOrigins = [
+  "http://localhost:5173",             // dev
+  "https://your-frontend.vercel.app"   // production
+];
+
 app.use(cors({
-  origin: "http://localhost:5173",  // your frontend URL
-  credentials: true                // allow cookies/session
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
 const task = require("./models/task");
 const user=require("./models/user");
