@@ -35,12 +35,12 @@ export default function TaskCard({ task }) {
 
   const startTimer = async () => {
     if(task.approxpomo<=0){
-      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/complete`);
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/complete`,{},{withCredentials: true, });
       return;
     }
     if (!task.endTime) {
       try {
-        const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/setEnd`);
+        const response = await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/setEnd`,{},{withCredentials: true, });
         const updatedEndTime = new Date(response.data.endTime);
         const timeInSec = Math.floor((updatedEndTime - Date.now()) / 1000);
         setTimeLeft(timeInSec);
@@ -66,8 +66,8 @@ export default function TaskCard({ task }) {
   };
 
   const endTimer = async () => {
-    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/clearEnd`);
-    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/pomo-complete`);
+    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/clearEnd`,{},{withCredentials: true, });
+    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/pomo-complete`,{},{withCredentials: true, });
   };
 
   const formatTime = () => {

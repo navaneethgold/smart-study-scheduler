@@ -30,7 +30,7 @@ const Settings = () => {
 
   const handleDeleteSubject = async (index) => {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${usedata.username}/${index}/delete`);
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${usedata.username}/${index}/delete`,{},{withCredentials: true, });
       const updatedSubjects = usedata.subjects.filter((_, i) => i !== index);
       setUserdata((prev) => ({ ...prev, subjects: updatedSubjects }));
     } catch (error) {
@@ -76,7 +76,7 @@ const Settings = () => {
       console.log(usedata.subjects);
       await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${usedata.username}/update-subjects`, {
         subjects: usedata.subjects,
-      });
+      },{withCredentials: true, });
       alert('Subjects updated successfully!');
     } catch (err) {
       console.error('Failed to update subjects:', err);
