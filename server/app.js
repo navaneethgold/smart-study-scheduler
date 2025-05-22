@@ -19,12 +19,11 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
-    sameSite: "none",    // 👈 Required for cross-site cookies
-    secure: true,        // 👈 Required on HTTPS
-    domain:'smart-study-scheduler-taupe.vercel.app',
+    sameSite: "none",
+    secure: true, // safer for local testing
+    domain: "smart-study-scheduler.onrender.com", // ✅ backend domain
+    maxAge: 7 * 24 * 60 * 60 * 1000,
   },
 };
 const allowedOrigins = [
