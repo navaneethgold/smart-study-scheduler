@@ -41,6 +41,9 @@ export default function Sidebar(){
     const logins=()=>{
         navigate("/login");
     }
+    const settings=()=>{
+      navigate("/settings");
+    }
     return(
         <>
         <div className="head">
@@ -73,7 +76,7 @@ export default function Sidebar(){
                 <div className="profile" onClick={hprofile}>
                     <h4>Profile</h4>
                 </div>
-                <div className="settings">
+                <div className="settings" onClick={settings}>
                     <h4>Settings</h4>
                 </div>
             {/* </div> */}

@@ -11,23 +11,21 @@ body, html {
     height: 100vh;
     display: flex;
     flex-direction: row;
-    gap: 400px;
+    /* gap: 400px; */
     align-items: center;
-    justify-content: center;
-    background: linear-gradient(to right, #0b1c23, #2b4b56, #9bb9c5);
+    /* justify-content: center; */
+    background: linear-gradient(to right, #0b1c23,#223c45, #4d7987, #9bb9c5);
     overflow: hidden;
 }
 
 .card{
+    position: fixed;
+    left: 5rem;
     width: 100%;
     max-width: 400px;
     padding: 2rem;
     margin: 1rem;
     height: auto;
-    /* width: 30%; */
-    /* height: 40%; */
-    /* margin-right: 0; */
-    /* margin-left: 3rem; */
     background-color: rgba(185, 235, 142, 0.7);
     border: 5px solid #b47962;
     display: flex;
@@ -80,21 +78,62 @@ button{
 }
 #icon{
     /* transform: scale(0.35); */
-    width: 287px;
-    height: 287px;
+    width: 260px;
+    height: 260px;
 }
 .logo{
+    position: fixed;
+    left: 45rem;
     display: flex;
     flex-direction: column;
+    /* justify-content: center; */
+    width: 35rem;
 }
 .logo2{
-    width: 300px;
     height: 300px;
-    align-items: flex-start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.txt{
+.txt5{
     margin: 2rem;
     color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.8rem;
+}
+
+#text6{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    font-size:xx-large;
+    align-items: center;
+    color: #90caf9;
+    font-family: 'Montserrat', sans-serif; /* Headings */
+}
+#text7{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #90caf9;
+    font-size: 1.3rem;
+    font-family: 'Montserrat', sans-serif; /* Headings */
+}
+#redirect{
+    padding: 0;
+    text-decoration: underline;
+    color: blue;
+    border: none;
+    /* background-color: rgba(185, 235, 142, 0.7) ; */
+}
+#redirect:hover{
+    cursor: pointer;
+}
+.redir{
+    margin-top: 1rem;
 }
 
 @media (max-width:480px){

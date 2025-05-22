@@ -37,6 +37,9 @@ const Login = () => {
       alert("Login failed.");
     }
   };
+  const redirec=async()=>{
+    navigate("/signup");
+  }
 
   return (
     <div className="outer">
@@ -72,6 +75,13 @@ const Login = () => {
           >
             Login
           </button>
+          
+          <div className="redir">
+            Don't have an account?
+            <a onClick={redirec} id='redirect'>
+              SignUp
+            </a>
+          </div>
         </Box>
         
 
@@ -84,8 +94,11 @@ const Login = () => {
       <div className='logo2'>
           <img src="/Icon.png" alt="icon" id='icon'/>
       </div>
-      <div className="txt">
-        <h1>Welcome Back to TimeTuner</h1>
+      <div className="txt5">
+        <div id='text6'>Welcome Back to TimeTuner</div>
+      </div>
+      <div className="txt1">
+        <div id='text7'>Where Your Time Meets Precision</div>
       </div>
     </div>
     </div>

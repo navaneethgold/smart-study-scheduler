@@ -7,6 +7,7 @@ import Signup from "./pages/signup";
 import Login from "./pages/login";
 import NewExam from "./pages/newexam";
 import Logout from "./pages/logout";
+import Settings from "./pages/settings";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/profile" element={<Myprofile />} />
           <Route path="/newexam" element={<NewExam />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>

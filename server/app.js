@@ -251,6 +251,54 @@ app.put("/:id/clearEnd", async (req, res) => {
 });
 
 
+app.delete("/:username/:index/delete", async (req, res) => {
+  const { username, index } = req.params;
+
+  try {
+    const curruser = await user.findOne({ username: username });
+    if (!curruser) return res.status(404).json({ error: "User not found" });
+
+    const subjectToDelete = curruser.subjects[index];
+    if (!subjectToDelete) return res.status(404).json({ error: "Subject not found" });
+
+    await task.deleteMany({ subject: subjectToDelete.subjectName });
+
+    curruser.subjects.splice(index, 1);
+    await curruser.save();
+
+    res.status(200).json({ message: "Subject and related tasks deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting subject:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+app.put("/:username/update-subjects", async (req, res) => {
+  const { username } = req.params;
+  const {subjects} = req.body;
+  console.log(subjects);
+  try {
+    const currUser = await user.findOne({ username });
+
+    if (!currUser) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    if (!Array.isArray(subjects)) {
+      return res.status(400).json({ error: "Invalid subjects data" });
+    }
+
+    currUser.subjects = subjects;
+    await currUser.save();
+
+    res.status(200).json({ message: "Subjects updated successfully" });
+  } catch (err) {
+    console.error("Error updating subjects:", err);
+    res.status(500).json({ error: "Server error" });
+  }
+});
+
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
