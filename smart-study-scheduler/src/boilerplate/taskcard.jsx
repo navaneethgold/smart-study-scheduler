@@ -35,7 +35,7 @@ export default function TaskCard({ task }) {
 
   const startTimer = async () => {
     if(task.approxpomo<=0){
-      await axios.put(`http://localhost:5000/${task._id}/complete`);
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/complete`);
       return;
     }
     if (!task.endTime) {
@@ -66,8 +66,8 @@ export default function TaskCard({ task }) {
   };
 
   const endTimer = async () => {
-    await axios.put(`http://localhost:5000/${task._id}/clearEnd`);
-    await axios.put(`http://localhost:5000/${task._id}/pomo-complete`);
+    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/clearEnd`);
+    await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${task._id}/pomo-complete`);
   };
 
   const formatTime = () => {

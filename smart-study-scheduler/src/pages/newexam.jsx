@@ -17,7 +17,7 @@ const NewExam = () => {
   useEffect(()=>{
     const checkAuth=async()=>{
       try{
-        const res=await axios.get("http://localhost:5000/check-auth",{
+        const res=await axios.get(`${import.meta.env.VITE_API_BASE_URL}/check-auth`,{
           withCredentials:true,
         });
         setIsLogged(res.data.isAuthenticated);
@@ -36,7 +36,7 @@ const NewExam = () => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:5000/user/subjects", { withCredentials: true })
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/user/subjects`, { withCredentials: true })
       .then(res => {
         const initialSelection = {};
         res.data.forEach(sub => {
@@ -88,7 +88,7 @@ const NewExam = () => {
   console.log(perday);
   try {
     const response = await axios.post(
-      "http://localhost:5000/generate-plan",
+      `${import.meta.env.VITE_API_BASE_URL}/generate-plan`,
       { selectedData, date, perday },
       { withCredentials: true }
     );
@@ -96,7 +96,7 @@ const NewExam = () => {
     const data = response.data;
     let generatedTasks = data.plan; // assuming backend returns { tasks: [...] }
     console.log("ide na:",generatedTasks);
-      await axios.post("http://localhost:5000/add", generatedTasks, { headers: {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/add`, generatedTasks, { headers: {
     "Content-Type": "application/json"
   },withCredentials: true });
   // });
@@ -116,7 +116,7 @@ const summarizeit=async()=>{
   }));
 
    try {
-    const response = await axios.post("http://localhost:5000/summarize", {
+    const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/summarize`, {
       allSubjects,
     }, { withCredentials: true });
 

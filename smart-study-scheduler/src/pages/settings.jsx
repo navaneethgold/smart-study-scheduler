@@ -11,7 +11,7 @@ const Settings = () => {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/check-auth', {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/check-auth`, {
           withCredentials: true,
         });
         setislogged(res.data.isAuthenticated);
@@ -30,7 +30,7 @@ const Settings = () => {
 
   const handleDeleteSubject = async (index) => {
     try {
-      await axios.delete(`http://localhost:5000/${usedata.username}/${index}/delete`);
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/${usedata.username}/${index}/delete`);
       const updatedSubjects = usedata.subjects.filter((_, i) => i !== index);
       setUserdata((prev) => ({ ...prev, subjects: updatedSubjects }));
     } catch (error) {
@@ -74,7 +74,7 @@ const Settings = () => {
   const handleSave = async () => {
     try {
       console.log(usedata.subjects);
-      await axios.put(`http://localhost:5000/${usedata.username}/update-subjects`, {
+      await axios.put(`${import.meta.env.VITE_API_BASE_URL}/${usedata.username}/update-subjects`, {
         subjects: usedata.subjects,
       });
       alert('Subjects updated successfully!');

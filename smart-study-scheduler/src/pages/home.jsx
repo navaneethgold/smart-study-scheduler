@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(()=>{
     const checkAuth=async()=>{
       try{
-        const res= await axios.get("http://localhost:5000/check-auth",{
+        const res= await axios.get(`${import.meta.env.VITE_API_BASE_URL}/check-auth`,{
           withCredentials: true,
         });
         setIsLogged(res.data.isAuthenticated);
@@ -30,7 +30,7 @@ export default function Home() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/tasks", {
+        const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/tasks`, {
             withCredentials: true, // ✅ this sends the session cookie
         });
         setTasks(res.data);

@@ -8,7 +8,7 @@ const Logout = () => {
   const from = location.state?.from?.pathname || "/";
   const handleLogout = async () => {
     try {
-      await axios.post("http://localhost:5000/logout", {}, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/logout`, {}, {
         withCredentials: true,
       });
       alert("Logout successful!");

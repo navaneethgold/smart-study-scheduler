@@ -9,7 +9,7 @@ export default function Sidebar(){
     useEffect(()=>{
     const checkAuth=async()=>{
       try{
-        const res= await axios.get("http://localhost:5000/check-auth",{
+        const res= await axios.get(`${import.meta.env.VITE_API_BASE_URL}/check-auth`,{
           withCredentials: true,
         });
         setIsLogged(res.data.isAuthenticated);

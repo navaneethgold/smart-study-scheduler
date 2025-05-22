@@ -10,7 +10,7 @@ const Myprofile=()=>{
   useEffect(()=>{
     const checkAuth=async()=>{
       try{
-        const res=await axios("http://localhost:5000/check-auth",{
+        const res=await axios(`${import.meta.env.VITE_API_BASE_URL}/check-auth`,{
           withCredentials:true,
         });
         if(res.data.isAuthenticated){
