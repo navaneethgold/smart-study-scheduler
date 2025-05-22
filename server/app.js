@@ -315,6 +315,9 @@ app.put("/:username/update-subjects", async (req, res) => {
   }
 });
 
+app.get("/ping", (req, res) => {
+  res.send("Backend is alive!");
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
