@@ -26,7 +26,7 @@ const sessionOptions={
 };
 const allowedOrigins = [
   "http://localhost:5173",             // dev
-  "https://your-frontend.vercel.app"   // production
+  "https://smart-study-scheduler-taupe.vercel.app"   // production
 ];
 
 app.use(cors({
