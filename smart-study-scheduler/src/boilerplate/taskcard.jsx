@@ -39,11 +39,19 @@ export default function TaskCard({ task }) {
       return;
     }
     if (!task.endTime) {
-      const response = await axios.put(`http://localhost:5000/${task._id}/setEnd`);
-      const updatedEndTime = new Date(response.data.endTime);
-      const timeInSec = Math.floor((updatedEndTime - Date.now()) / 1000);
-      setTimeLeft(timeInSec);
-      setIsRunning(true);
+      try {
+        const response = await axios.put(`http://localhost:5000/${task._id}/setEnd`);
+        const updatedEndTime = new Date(response.data.endTime);
+        const timeInSec = Math.floor((updatedEndTime - Date.now()) / 1000);
+        setTimeLeft(timeInSec);
+        setIsRunning(true);
+      } catch (error) {
+        if (error.response && error.response.data && error.response.data.message) {
+          alert(error.response.data.message);  // 🔔 Show alert with message from backend
+        } else {
+          alert("An unexpected error occurred."); // 🔔 Fallback error
+        }
+      }
     } else {
       const remaining = Math.floor((new Date(task.endTime) - Date.now()) / 1000);
       if (remaining <= 0) {

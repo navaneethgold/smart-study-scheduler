@@ -216,10 +216,15 @@ app.put("/:id/setEnd", async (req, res) => {
     const { id } = req.params;
 
     const currtask = await task.findById(id);
+
     if (!currtask) {
       return res.status(404).json({ message: "Task not found" });
     }
-
+    const already=await task.find({username:currtask.username,endTime:null});
+    const findall=await task.find({username:currtask.username});
+    if(already.length!=findall.length){
+      return res.status(403).json({ message: "Another Pomodoro is already running." });
+    }
     currtask.endTime = new Date(Date.now() + 1 * 60 * 1000); // 30 minutes from now
     await currtask.save();
 
