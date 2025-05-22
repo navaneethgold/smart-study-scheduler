@@ -24,6 +24,7 @@ const sessionOptions = {
     httpOnly: true,
     sameSite: "none",    // 👈 Required for cross-site cookies
     secure: true,        // 👈 Required on HTTPS
+    domain:'smart-study-scheduler-taupe.vercel.app',
   },
 };
 const allowedOrigins = [
