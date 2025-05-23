@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 const Task = require("./models/task");
 const cors = require("cors");
+app.set("trust proxy", 1);
 const sessionOptions = {
   secret: process.env.SECRET,
   resave: false,
@@ -22,7 +23,7 @@ const sessionOptions = {
     httpOnly: true,
     sameSite: "none",
     secure: true, // safer for local testing
-    domain: "smart-study-scheduler.onrender.com", // ✅ backend domain
+    domain: "smart-study-scheduler-front.onrender.com", // ✅ backend domain
     maxAge: 7 * 24 * 60 * 60 * 1000,
   },
 };
