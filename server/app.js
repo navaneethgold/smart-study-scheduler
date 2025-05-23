@@ -29,7 +29,8 @@ const sessionOptions = {
 };
 const allowedOrigins = [
   "http://localhost:5173",             // dev
-  "https://smart-study-scheduler-front.onrender.com"   // production
+  "https://smart-study-scheduler-front.onrender.com",   // production
+  "https://smart-study-scheduler-taupe.vercel.app/"
 ];
 
 app.use(cors({
