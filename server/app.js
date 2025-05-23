@@ -23,7 +23,7 @@ const sessionOptions = {
     httpOnly: true,
     sameSite: "none",
     secure: true, // safer for local testing
-    domain: "smart-study-scheduler-front.onrender.com", // ✅ backend domain
+    domain: "smart-study-scheduler.onrender.com", // ✅ backend domain
     maxAge: 7 * 24 * 60 * 60 * 1000,
   },
 };
