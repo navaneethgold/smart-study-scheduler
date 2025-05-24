@@ -74,3 +74,33 @@ button:hover{
     justify-content: center; 
     gap: 10px; 
 }
+.timerrs{
+    display: none;
+}
+
+@media (max-width:480px){
+    .timer{
+        display: none;
+    }
+    #mybox{
+        width: 280px;
+        height: 243px;
+        margin: 2rem;
+        margin-bottom: 3rem;
+    }
+    #poms{
+        width: 8rem;
+    }
+    .value{
+        margin-left: 0.5rem;
+    }
+    .timerrs{
+        display: block;
+        color: white;
+        margin-left: 1.5rem;
+    }
+    #but{
+        display: flex;
+        flex-direction: row;
+    }
+}

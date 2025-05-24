@@ -18,8 +18,17 @@ body,html{
     bottom: 0;
     overflow-y: auto;
 }
-/* .full{
-    position: fixed;
-    left: 225px;
-    right: 0;
-} */
+
+@media (max-width:480px){
+    .remain{
+        height: 92%;
+        background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
+        position: fixed;
+        left: 60px;
+        right: 0;
+        top: 8%;
+        bottom: 0;
+        overflow-y: auto;
+        width: calc(100%-60px);
+    }
+}

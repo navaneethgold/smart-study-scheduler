@@ -98,9 +98,12 @@ export default function TaskCard({ task }) {
             </div>
           </div>
           <div id="but">
-            <button onClick={startTimer} disabled={isRunning}>
+            <button onClick={startTimer} disabled={isRunning} id='poms'>
               Start a Pomodoro
             </button>
+            <div className="timerrs">
+              <h1>{formatTime()}</h1>
+            </div>
           </div>
         </div>
         <div className="timer">

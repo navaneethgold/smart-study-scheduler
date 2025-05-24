@@ -54,7 +54,7 @@ export default function Home() {
     <>
       
       <div className="remain">
-        <div style={{ padding: "20px" }} id="all">
+        <div id="all">
           {tasks.map(task => (
             <TaskCard key={task._id} task={task} />
           ))}
