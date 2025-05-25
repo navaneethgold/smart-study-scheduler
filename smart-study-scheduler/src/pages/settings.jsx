@@ -90,7 +90,7 @@ const Settings = () => {
         {usedata.subjects.map((subt, index) => (
           <div key={index} className='each'>
             <div className='subject-header'>
-              <div className="sn">Subject Name: </div>
+              <div className="sn" id='sn4'>Subject Name: </div>
               <input
                 type='text'
                 value={subt.subjectName}

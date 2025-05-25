@@ -44,7 +44,7 @@ const Login = () => {
   return (
     <div className="outer">
     <div className="card">
-    <div className="tala"><h1 className='heading'>Login to TimeTuner</h1></div>
+    <div className="tala"><h1 className='heading'><img src="/Icon.png" alt="icon" id='balu' />Login to TimeTuner</h1></div>
       <div className="dabba">
       <form onSubmit={handleSubmit}>
         <Box sx={{display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center'}}>

@@ -135,12 +135,118 @@ button{
 .redir{
     margin-top: 1rem;
 }
+#balu{
+    display: none;
+}
 
 @media (max-width:480px){
-    .heading{
-        font-size:large;
+    body, html {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        overflow-x: hidden;
     }
+    
+    .outer {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: row;
+        /* gap: 400px; */
+        align-items: center;
+        /* justify-content: center; */
+        background: linear-gradient(to right, #0b1c23,#223c45, #4d7987, #9bb9c5);
+        overflow: auto;
+    }
+    
     .card{
-        padding: 2rem;
+        position: fixed;
+        left: 0.5rem;
+        width: 100%;
+        max-width: 310px;
+        padding: 1rem;
+        margin: 0.5rem;
+        height: 25rem;
+        background-color: rgba(185, 235, 142, 0.7);
+        border: 5px solid #b47962;
+        display: flex;
+        justify-content: center;
+        gap: 0rem;
+        flex-direction: column;
+        /* align-items: flex-start; */
+        /* padding: 3rem; */
+        font-family: 'Montserrat', sans-serif; /* Headings */
+        border-radius: 15px;
+        box-shadow: 0 0 10px #7fff00;
+        transition: transform 0.3s ease,box-shadow 0.3s ease;
+    }
+    .card:hover{
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #FE7743;
+    }
+    .heading{
+        font-weight:bold;
+        font-size:x-large;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .sub{
+        background-color: rgba(0, 0, 0, 0);
+        padding: 8px;
+        width: 15rem;
+        margin-top: 30px;
+        border: 2px solid #b47962;
+        font-family: 'Montserrat', sans-serif; /* Headings */
+        font-size: medium;
+        border-radius: 10px;
+        font-weight: bolder;
+        transition: background-color 0.3s ease,box-shadow 0.3s ease, transform 0.3s ease;
+    
+    }
+    .sub:hover{
+        box-shadow: 0 0 20px #b47962;
+        background-color: #b47962;
+        cursor: pointer;
+    }
+    .sub:active{
+        transform: scale(0.95);
+    }
+    #input-with-sx,#password-input{
+        width: 60vw;
+    }   
+    button{
+        width: 18vw;
+    }
+    #icon{
+        /* transform: scale(0.35); */
+        width: 260px;
+        height: 260px;
+    }
+    .logo{
+        display: none;
+    }
+    #redirect{
+        padding: 0;
+        text-decoration: underline;
+        color: blue;
+        border: none;
+        /* background-color: rgba(185, 235, 142, 0.7) ; */
+    }
+    #redirect:hover{
+        cursor: pointer;
+    }
+    .redir{
+        margin-top: 1rem;
+    }
+    #balu{
+        display: block;
+    }
+    .tala h1 img{
+        width: 5rem;
+        height: 5rem;
+        margin: 1rem;
     }
 }

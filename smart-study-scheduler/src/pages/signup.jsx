@@ -84,7 +84,7 @@ const Signup = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="all-shit">
-          <h2 className='talakai'>Sign Up</h2>
+          <h2 className='talakai'><img src="/Icon.png" alt="icon" id='inka' />Sign Up</h2>
           <div className="sinp">
           {/* Headings Section */}
           <div className="side-headings">

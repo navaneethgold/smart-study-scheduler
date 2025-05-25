@@ -220,6 +220,14 @@ const summarizeit=async()=>{
         )}
       </div>
       </div>
+      <div className="aisum3">
+        {summaryText && (
+          <div className="summary-box">
+            <h3>Motivational Summary</h3>
+            <p>{summaryText}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
