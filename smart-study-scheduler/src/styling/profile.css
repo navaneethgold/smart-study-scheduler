@@ -100,3 +100,79 @@ li {
 #logout button:hover {
   background-color: #c62828;
 }
+
+@media (max-width:480px){
+  .cards{
+    overflow-x: hidden;
+  }
+    .alldata {
+      position: fixed;
+      top: 8%;
+      left: 60px;
+      bottom: 0;
+      right: 0;
+      background: linear-gradient(to right, #204e62, #528ea1, #9bb9c5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    .main-heading {
+      font-size: 1.5rem;
+      text-align: center;
+      color: #7fff00;
+    }
+    .cards {
+      background: linear-gradient(to right, #1c1c1c, #000000, #1c1c1c);
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      border-radius: 20px;
+      position: fixed;
+      top: 13%;
+      left: 70px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      max-width: 250px;
+      width: 16rem;
+      color: white;
+      max-height: 80%;
+      overflow-y: auto;
+    }
+    
+    .sub-heading {
+      width: 15rem;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      /* margin-bottom: 0.5rem; */
+      color: #00e5ff;
+    }
+    .content-box {
+      width: 14rem;
+      background-color: #2a2a2a;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .subjects-box {
+      width: 14rem;
+      background-color: #2a2a2a;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .top-row{
+      flex-direction: column;
+    }
+    #logout button {
+      width: 6rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      background-color: #e53935;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+}

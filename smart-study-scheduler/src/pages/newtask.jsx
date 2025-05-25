@@ -63,7 +63,7 @@ const AddTaskForm = () => {
   <div className="caard">
     <div className="top">Add Task Manually</div>
 
-    <form onSubmit={handleSubmit} style={{ padding: "1rem" }}>
+    <form onSubmit={handleSubmit} id="mform">
       <div className="form-fields">
         <div className="input-group">
           <label htmlFor="subject">Subject:</label>
